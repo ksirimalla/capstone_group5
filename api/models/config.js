@@ -3,6 +3,7 @@ module.exports = {
     USER: "root",
     PASSWORD: "",
     DB: "branchlessBank",
+    PORT:"3306",
     dialect: "mysql",
     pool: {
       max: 5,

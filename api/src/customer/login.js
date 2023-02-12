@@ -12,9 +12,19 @@ async function Login(req, res) {
         if (data) {
             data = data.toJSON();
             validateJwt.createToken({ userName: data.userName, customerId: data.customerId, role: data.role }, (token) => {
-                res.json({ status: true, data: { userName: data.userName, customerId: data.customerId, role: data.role, accessToken: token } });
+                res.json({
+                    status: true,
+                    data: {
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        userName: data.userName,
+                        customerId: data.customerId,
+                        role: data.role,
+                        accessToken: token
+                    }
+                });
             })
-        }else{
+        } else {
             res.json({ status: false, data: null, message: "User not Found" });
         }
     }).catch(err => {

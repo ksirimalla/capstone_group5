@@ -7,14 +7,21 @@ import {
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GlobalStore from './store/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 
 const router = createBrowserRouter(Routers);
+let persistor = persistStore(GlobalStore);
+
+
 function App() {
   return (
     <Provider store={GlobalStore}>
-    <div className="App">
-        <RouterProvider router={router} />
-    </div>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="App">
+          <RouterProvider router={router} />
+        </div>
+      </PersistGate>
     </Provider>
   );
 }

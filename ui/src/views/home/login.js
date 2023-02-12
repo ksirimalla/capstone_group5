@@ -11,16 +11,29 @@ import { LoginSchema } from './login.schema';
 import Axios from "../../utils/axios";
 import LoginImage from "../../assets/images/home.jpg";
 import Image from 'react-bootstrap/Image'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setupUser } from '../../store/features/userReducer';
+
 
 function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
     const initialValues = {
         userName: '',
         password: ''
     };
 
     function handleSubmit(values) {
-        Axios.post('login', values).then((data) => {
-            alert("Created");
+        Axios.post('login', values).then((response) => {
+            if (response.data.status) {
+                dispatch(setupUser(response.data.data))
+                if (response.data.data.role === "Admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/customer");
+                }
+            }
         }).catch(err => {
             console.log(err);
         })

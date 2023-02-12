@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
@@ -9,6 +8,8 @@ import FormLabel from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUpSchema } from './signup.schema';
+import LoginImage from "../../assets/images/home.jpg";
+import Image from 'react-bootstrap/Image';
 import Axios from "../../utils/axios";
 
 function Signup() {
@@ -20,17 +21,21 @@ function Signup() {
 
 
     function handleSubmit(values) {
-        Axios.post('register',values).then((data) =>{
+        Axios.post('register', values).then((data) => {
             alert("Created");
-        }).catch(err =>{
+        }).catch(err => {
             console.log(err);
         })
     }
 
     return (
-        <Container>
+        <div className='m-0 w-100 overflow-hidden'>
             <Row>
-                <Col>Image</Col>
+                <Col className='col-7'>
+                    <Image
+                        src={LoginImage} className="login-image"
+                    />
+                </Col>
                 <Col>
                     <Card className='m-3'>
                         <Card.Header>Sign Up</Card.Header>
@@ -335,7 +340,7 @@ function Signup() {
                     </Card>
                 </Col>
             </Row>
-        </Container >
+        </div >
 
     );
 }

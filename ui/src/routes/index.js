@@ -5,6 +5,8 @@ import ContentLayout from '../layouts/contentLayout';
 
 // Views
 import Signup from '../views/home/signup';
+import Login from '../views/home/login';
+
 import Home from '../views/home/home';
 
 
@@ -34,6 +36,7 @@ const routes = [
         element: <FullLayout />,
         children: [
             { path: 'signup', element: <Signup /> },
+            { path: 'login', element: <Login /> },
             { path: '404', element: <TODO /> },
             { path: '*', element: <TODO /> },
             { path: '', element: <Home /> },

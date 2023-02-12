@@ -1,32 +1,31 @@
 const db = require("../../models");
 const Customer = db.Customer;
 
-async function UserRegister(req, res) {
+async function UpdateCustomer(req, res) {
     const request = req.body;
-    console.log(request)
     const validator = checkValidations(request);
     if (validator.status) {
-        const list = await Customer.findAll({ userName: request.userName });
-        if (list && list.length > 0) {
-            res.json({
-                status: false,
-                message: "User already exist with this email ",
-                data: null,
-            });
-        } else {
-            Customer.create({ ...request, role: "Customer" })
-                .then(data => {
-                    res.send(data);
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message:
-                            err.message || "Some error occurred while creating the Customer."
-                    });
+        Customer.update(request, {
+            where: {
+                customerId: request.customerId
+            }
+        }).then(data => {
+            if (data && data.length && data[0] > 0) {
+                res.send({
+                    status: true,
+                    message: " Updated Successfully",
                 });
-        }
+            } else {
+                throw new Error("Customer Not Found");
+            }
+        }).catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retriving the Customer."
+            });
+        });
     } else {
-        res.json({
+        res.status(500).send({
             status: false,
             message: validator.message,
             data: null,
@@ -44,8 +43,6 @@ function checkValidations(request) {
         obj = { status: false, message: "Please enter Date of Birth" };
     } else if (!request.phoneNumber) {
         obj = { status: false, message: "Please enter Phone Number" };
-    } else if (!request.password) {
-        obj = { status: false, message: "Please enter Password" };
     } else if (!request.email) {
         obj = { status: false, message: "Please enter Email" };
     } else if (!request.addressLine1) {
@@ -67,6 +64,5 @@ function checkValidations(request) {
     return obj;
 }
 
-module.exports = {
-    UserRegister: UserRegister
-} 
+
+module.exports = UpdateCustomer;

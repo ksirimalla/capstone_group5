@@ -1,6 +1,8 @@
 var CreateCustomer = require("./createCustomer");
 var Login = require("./login");
 var CustomerList = require("./customerList");
+var ViewCustomer = require("./viewCustomer");
+var UpdateCustomer = require("./updateCustomer");
 
 const CustomerRoutes = [
   {
@@ -19,6 +21,18 @@ const CustomerRoutes = [
     path: "/customerList",
     method: "post",
     callback: CustomerList,
+    guard:false,
+  },
+  {
+    path: "/getCustomer",
+    method: "get",
+    callback: ViewCustomer,
+    guard:false,
+  },
+  {
+    path: "/updateCustomer",
+    method: "put",
+    callback: UpdateCustomer,
     guard:false,
   },
 ];

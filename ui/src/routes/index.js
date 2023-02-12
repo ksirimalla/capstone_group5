@@ -6,8 +6,11 @@ import ContentLayout from '../layouts/contentLayout';
 // Views
 import Signup from '../views/home/signup';
 import Login from '../views/home/login';
-
 import Home from '../views/home/home';
+
+import CustomerDashboard from '../views/customer/dashboard';
+
+import AdminDashboard from '../views/admin/dashboard';
 
 
 const TODO = () => {
@@ -20,7 +23,7 @@ const routes = [
         element: <ContentLayout />,
         children: [
             { path: 'list', element: <TODO /> },
-            { path: '', element: <TODO /> },
+            { path: '', element: <AdminDashboard /> },
         ],
     },
     {
@@ -28,7 +31,7 @@ const routes = [
         element: <ContentLayout />,
         children: [
             { path: 'list', element: <TODO /> },
-            { path: '', element: <TODO /> },
+            { path: '', element: <CustomerDashboard /> },
         ],
     },
     {

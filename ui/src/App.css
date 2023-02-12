@@ -7,3 +7,20 @@
   height: 100vh;
   border: 1px solid #ccc;
 }
+
+.home-page {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background-image: url("assets/images/homebg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-page h1{
+  text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
+  color: white;
+
+}

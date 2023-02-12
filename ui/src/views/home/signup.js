@@ -11,8 +11,10 @@ import { SignUpSchema } from './signup.schema';
 import LoginImage from "../../assets/images/home.jpg";
 import Image from 'react-bootstrap/Image';
 import Axios from "../../utils/axios";
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+    const navigate = useNavigate();
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -21,10 +23,16 @@ function Signup() {
 
 
     function handleSubmit(values) {
-        Axios.post('register', values).then((data) => {
-            alert("Created");
+        Axios.post('register', values).then((response) => {
+            if (response.data) {
+                alert("Created");
+                navigate("/login")
+            } else {
+                alert("Error")
+            }
         }).catch(err => {
             console.log(err);
+            alert("Error");
         })
     }
 

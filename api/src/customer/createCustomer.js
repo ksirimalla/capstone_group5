@@ -6,7 +6,7 @@ async function UserRegister(req, res) {
     console.log(request)
     const validator = checkValidations(request);
     if (validator.status) {
-        const list = await Customer.findAll({ userName: request.userName });
+        const list = await Customer.findAll({ where: { userName: request.userName } });
         if (list && list.length > 0) {
             res.json({
                 status: false,

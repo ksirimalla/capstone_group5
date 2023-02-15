@@ -11,6 +11,9 @@ import Home from '../views/home/home';
 import CustomerDashboard from '../views/customer/dashboard';
 
 import AdminDashboard from '../views/admin/dashboard';
+import CustomerList from '../views/admin/customerList';
+import ViewCustomer from '../views/admin/viewCustomer';
+import EditCustomer from '../views/admin/editCustomer';
 
 
 const TODO = () => {
@@ -22,7 +25,9 @@ const routes = [
         path: 'admin',
         element: <ContentLayout />,
         children: [
-            { path: 'list', element: <TODO /> },
+            { path: 'customers', element: <CustomerList /> },
+            { path: 'customer/view/:id', element: <ViewCustomer /> },
+            { path: 'customer/edit/:id', element: <EditCustomer /> },
             { path: '', element: <AdminDashboard /> },
         ],
     },

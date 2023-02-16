@@ -16,12 +16,12 @@ export const SignUpSchema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 
     addressLine1: Yup.string().required("Please enter Address Line"),
-    addressLine2: Yup.string(),
+    addressLine2: Yup.string().nullable(),
     city: Yup.string().required("Please enter City"),
     state: Yup.string().required("Please enter State"),
     country: Yup.string().required("Please enter Country"),
     postalCode: Yup.string().required("Please enter Postal Code").length(6, "Postal Code should be 6 digits"),
-    userImage: Yup.string(),
+    userImage: Yup.string().nullable(),
     idProof: Yup.string().required("Please enter Id Proof"),
     idProofValue: Yup.string().required("Please enter Id Proof Value")
 });

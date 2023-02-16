@@ -14,6 +14,8 @@ import AdminDashboard from '../views/admin/dashboard';
 import CustomerList from '../views/admin/customerList';
 import ViewCustomer from '../views/admin/viewCustomer';
 import EditCustomer from '../views/admin/editCustomer';
+import CustomerProfile from '../views/customer/customerProfile';
+import EditCustomerProfile from '../views/customer/editCustomerProfile';
 
 
 const TODO = () => {
@@ -35,7 +37,8 @@ const routes = [
         path: 'customer',
         element: <ContentLayout />,
         children: [
-            { path: 'list', element: <TODO /> },
+            { path: 'profile', element: <CustomerProfile /> },
+            { path: 'edit-profile', element: <EditCustomerProfile /> },
             { path: '', element: <CustomerDashboard /> },
         ],
     },

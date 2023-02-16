@@ -141,22 +141,6 @@ function Signup() {
                                                     </Field>
                                                     <ErrorMessage name="email" component="span" className="text-danger text-start" />
                                                 </Col>
-                                                <Col className='d-flex flex-column'>
-                                                    <Field
-                                                        name="userName"
-                                                    >
-                                                        {({ field }) => (
-                                                            <FormGroup controlId="userName" className="d-flex flex-column">
-                                                                <FormLabel className='text-start'>User Name</FormLabel>
-                                                                <FormControl type={'text'} value={field.value} onChange={field.onChange}
-                                                                    className={errors.userName && touched.userName ?
-                                                                        "input-error" : null} onBlur={handleBlur} />
-                                                            </FormGroup>
-                                                        )}
-                                                    </Field>
-                                                    <ErrorMessage name="userName" component="span" className="text-danger text-start" />
-
-                                                </Col>
                                             </Row>
 
                                             <Row>
@@ -249,7 +233,7 @@ function Signup() {
                                                     >
                                                         {({ field }) => (
                                                             <FormGroup controlId="state" className="d-flex flex-column">
-                                                                <FormLabel className='text-start'>State</FormLabel>
+                                                                <FormLabel className='text-start'>Province</FormLabel>
                                                                 <FormControl type={'text'} value={field.value} onChange={field.onChange}
                                                                     className={errors.state && touched.state ?
                                                                         "input-error" : null} onBlur={handleBlur} />

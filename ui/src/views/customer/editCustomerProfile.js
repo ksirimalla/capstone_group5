@@ -8,17 +8,18 @@ import FormControl from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useNavigate, useParams } from 'react-router-dom';
-import { EditCustomerSchema } from './editCustomer.schema';
+import { useNavigate } from 'react-router-dom';
+import { EditCustomerProfileSchema } from './editCustomerProfile.schema';
+import { useSelector } from 'react-redux';
 
-function EditCustomer() {
-    const { id } = useParams();
+function EditCustomerProfile() {
+    const { customerId } = useSelector(state => state.user);
     const [customerDetails, setCustomerDetails] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (id)
-            Axios.get("getCustomer?id=" + id, {}).then(response => {
+        if (customerId)
+            Axios.get("getCustomer?id=" + customerId, {}).then(response => {
                 if (response.data && response.data) {
                     setCustomerDetails(response.data);
                 } else {
@@ -27,10 +28,10 @@ function EditCustomer() {
             }).catch(err => {
                 console.log(err);
             })
-    }, [id])
+    }, [customerId])
 
     function handleSubmit(values) {
-        Axios.put('updateCustomer', { customerId: id, ...values }).then((response) => {
+        Axios.put('updateCustomer', { customerId: customerId, ...values }).then((response) => {
             if (response.data) {
                 alert("Updated");
                 // navigate("/login")
@@ -45,7 +46,7 @@ function EditCustomer() {
 
 
     function handleCancel() {
-        navigate(`/admin/customers`)
+        navigate(`/customer`)
     }
 
     return (
@@ -58,7 +59,7 @@ function EditCustomer() {
                     <Formik
                         initialValues={customerDetails}
                         enableReinitialize={true}
-                        validationSchema={EditCustomerSchema}
+                        validationSchema={EditCustomerProfileSchema}
                         onSubmit={handleSubmit}
                     >
                         {(formik) => {
@@ -312,4 +313,4 @@ function EditCustomer() {
     );
 }
 
-export default EditCustomer;
+export default EditCustomerProfile;

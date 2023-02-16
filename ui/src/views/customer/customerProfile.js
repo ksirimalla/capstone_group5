@@ -5,16 +5,17 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function ViewCustomer() {
-    const { id } = useParams();
+function CustomerProfile() {
+    const { customerId } = useSelector(state => state.user);
     const [customerDetails, setCustomerDetails] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (id)
-            Axios.get("getCustomer?id=" + id, {}).then(response => {
+        if (customerId)
+            Axios.get("getCustomer?id=" + customerId, {}).then(response => {
                 if (response.data && response.data) {
                     setCustomerDetails(response.data);
                 } else {
@@ -23,14 +24,14 @@ function ViewCustomer() {
             }).catch(err => {
                 console.log(err);
             })
-    }, [id])
+    }, [customerId])
 
     function handleEdit() {
-        navigate(`/admin/customer/edit/${id}`)
+        navigate(`/customer/edit-profile`)
     }
 
     function handleCancel() {
-        navigate(`/admin/customers`)
+        navigate(`/customer`)
     }
     return (
         <div className="full-container">
@@ -68,7 +69,7 @@ function ViewCustomer() {
                             <Form.Text>{customerDetails?.phoneNumber}</Form.Text>
                         </Col>
                         <Col>
-                            <Form.Label className="mr-1">Email:</Form.Label>
+                            <Form.Label className="mr-1">EMail:</Form.Label>
                             <Form.Text>{customerDetails?.email}</Form.Text>
                         </Col>
                     </Row>
@@ -122,4 +123,4 @@ function ViewCustomer() {
     );
 }
 
-export default ViewCustomer;
+export default CustomerProfile;

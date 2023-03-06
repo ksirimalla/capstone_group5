@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
+import FormSelect from 'react-bootstrap/FormSelect';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
@@ -15,11 +16,23 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup() {
     const navigate = useNavigate();
+    const [accountTypeList, setAccountTypeList] = useState([]);
     const initialValues = {
         firstName: '',
         lastName: '',
         dateOfBirth: ''
     };
+
+    useEffect(() => {
+        Axios.get("getAllAccountType").then(response => {
+            if (response.data) {
+                setAccountTypeList(response.data);
+            }
+        }).catch(err => {
+            console.log(err);
+            alert("Error");
+        })
+    }, []);
 
 
     function handleSubmit(values) {
@@ -54,7 +67,10 @@ function Signup() {
                                 onSubmit={handleSubmit}
                             >
                                 {(formik) => {
-                                    const { errors, touched, isValid, dirty, handleBlur } = formik;
+                                    const { errors, touched, isValid, dirty, handleBlur,values } = formik;
+                                    console.log(errors)
+                                    console.log(touched)
+                                    console.log(values)
                                     return (
                                         <Form>
                                             <Row>
@@ -141,6 +157,21 @@ function Signup() {
                                                     </Field>
                                                     <ErrorMessage name="email" component="span" className="text-danger text-start" />
                                                 </Col>
+                                                <Col className='d-flex flex-column'>
+                                                    <Field
+                                                        name="userName"
+                                                    >
+                                                        {({ field }) => (
+                                                            <FormGroup controlId="userName" className="d-flex flex-column">
+                                                                <FormLabel className='text-start'>User Name</FormLabel>
+                                                                <FormControl type={'text'} value={field.value} onChange={field.onChange}
+                                                                    className={errors.userName && touched.userName ?
+                                                                        "input-error" : null} onBlur={handleBlur} />
+                                                            </FormGroup>
+                                                        )}
+                                                    </Field>
+                                                    <ErrorMessage name="userName" component="span" className="text-danger text-start" />
+                                                </Col>
                                             </Row>
 
                                             <Row>
@@ -161,11 +192,11 @@ function Signup() {
                                                 </Col>
                                                 <Col className='d-flex flex-column'>
                                                     <Field
-                                                        name="addressLine2"
+                                                        name="confirmPassword"
                                                     >
                                                         {({ field }) => (
                                                             <FormGroup controlId="confirmPassword" className="d-flex flex-column">
-                                                                <FormLabel className='text-start'>User Name</FormLabel>
+                                                                <FormLabel className='text-start'>Confirm Password</FormLabel>
                                                                 <FormControl type={'password'} value={field.value} onChange={field.onChange}
                                                                     className={errors.confirmPassword && touched.confirmPassword ?
                                                                         "input-error" : null} onBlur={handleBlur} />
@@ -312,6 +343,29 @@ function Signup() {
                                                     </Field>
                                                     <ErrorMessage name="idProofValue" component="span" className="text-danger text-start" />
 
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col className='d-flex flex-column'>
+                                                    <Field
+                                                        name="accountId"
+                                                    >
+                                                        {({ field }) => (
+                                                            <FormGroup controlId="accountId" className="d-flex flex-column">
+                                                                <FormLabel className='text-start'>Account Type</FormLabel>
+                                                                <FormSelect value={field.value} onChange={(e) => {
+                                                                    console.log(e)
+                                                                    field.onChange(e)
+                                                                }}
+                                                                    className={errors.accountId && touched.accountId ?
+                                                                        "input-error" : null} onBlur={handleBlur} >
+                                                                            <option value={""}></option>
+                                                                    {accountTypeList.map(row => <option key={row.accountId} value={row.accountId}>{row.name}</option>)}
+                                                                </FormSelect>
+                                                            </FormGroup>
+                                                        )}
+                                                    </Field>
+                                                    <ErrorMessage name="accountId" component="span" className="text-danger text-start" />
                                                 </Col>
                                             </Row>
                                             <Row className="mt-5">

@@ -23,5 +23,6 @@ export const SignUpSchema = Yup.object().shape({
     postalCode: Yup.string().required("Please enter Postal Code").length(6, "Postal Code should be 6 digits"),
     userImage: Yup.string().nullable(),
     idProof: Yup.string().required("Please enter Id Proof"),
-    idProofValue: Yup.string().required("Please enter Id Proof Value")
+    idProofValue: Yup.string().required("Please enter Id Proof Value"),
+    accountId: Yup.number().required("Please select Account Number"),
 });

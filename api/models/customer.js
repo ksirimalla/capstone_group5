@@ -56,6 +56,8 @@ module.exports = (sequelize, Sequelize) => {
       idProofValue: {
         type: Sequelize.STRING
       }
+    },{
+      initialAutoIncrement: 1000,
     });
   
     return Customer;

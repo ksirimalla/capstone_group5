@@ -18,6 +18,7 @@ import CustomerProfile from '../views/customer/customerProfile';
 import EditCustomerProfile from '../views/customer/editCustomerProfile';
 import AccountTypeList from '../views/admin/accountTypeList';
 import CreateAccountType from '../views/admin/createAccountType';
+import CustomerAccountsList from '../views/customer/customerAccountsList';
 
 
 const TODO = () => {
@@ -43,6 +44,7 @@ const routes = [
         children: [
             { path: 'profile', element: <CustomerProfile /> },
             { path: 'edit-profile', element: <EditCustomerProfile /> },
+            { path: 'accounts', element: <CustomerAccountsList /> },
             { path: '', element: <CustomerDashboard /> },
         ],
     },

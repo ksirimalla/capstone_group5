@@ -37,7 +37,7 @@ function Header() {
                         </>
                             : <>
                                 <Nav.Link href="/customer/profile">Profile</Nav.Link>
-                                <Nav.Link href="/customer/accounts" disabled>Accounts</Nav.Link>
+                                <Nav.Link href="/customer/accounts">Accounts</Nav.Link>
                             </>}
 
                     </Nav>

@@ -20,6 +20,7 @@ import AccountTypeList from '../views/admin/accountTypeList';
 import CreateAccountType from '../views/admin/createAccountType';
 import CustomerAccountsList from '../views/customer/customerAccountsList';
 import AllAccountsList from '../views/admin/allAccountList';
+import AdminAccountDetailView from '../views/admin/adminAccountDetailView';
 
 
 const TODO = () => {
@@ -37,6 +38,7 @@ const routes = [
             { path: 'accountTypes', element: <AccountTypeList /> },
             { path: 'accountTypes/create', element: <CreateAccountType /> },
             { path: 'accounts', element: <AllAccountsList /> },
+            { path: 'accounts/view/:id', element: <AdminAccountDetailView /> },
             { path: '', element: <AdminDashboard /> },
         ],
     },

@@ -19,6 +19,7 @@ import EditCustomerProfile from '../views/customer/editCustomerProfile';
 import AccountTypeList from '../views/admin/accountTypeList';
 import CreateAccountType from '../views/admin/createAccountType';
 import CustomerAccountsList from '../views/customer/customerAccountsList';
+import AllAccountsList from '../views/admin/allAccountList';
 
 
 const TODO = () => {
@@ -35,6 +36,7 @@ const routes = [
             { path: 'customer/edit/:id', element: <EditCustomer /> },
             { path: 'accountTypes', element: <AccountTypeList /> },
             { path: 'accountTypes/create', element: <CreateAccountType /> },
+            { path: 'accounts', element: <AllAccountsList /> },
             { path: '', element: <AdminDashboard /> },
         ],
     },

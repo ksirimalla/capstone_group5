@@ -33,7 +33,8 @@ function Header() {
                         <Nav.Link href={isAdminRole ? '/admin' : '/customer'}>Home</Nav.Link>
                         {isAdminRole ? <>
                             <Nav.Link href="/admin/customers">Customers</Nav.Link>
-                            <Nav.Link href="/admin/accounts" disabled>Accounts</Nav.Link>
+                            <Nav.Link href="/admin/accounts" >Accounts</Nav.Link>
+                            <Nav.Link href="/admin/accountTypes" >Account Types</Nav.Link>
                         </>
                             : <>
                                 <Nav.Link href="/customer/profile">Profile</Nav.Link>

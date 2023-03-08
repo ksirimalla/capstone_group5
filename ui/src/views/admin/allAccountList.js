@@ -5,12 +5,12 @@ import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
-function AccountTypeList() {
+function AllAccountsList() {
     const [accountTypeList, setAccountTypeList] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        Axios.get("getAllAccountType").then(response => {
+        Axios.get("getAllCustomerAccounts").then(response => {
             if (response.data && response.data.length) {
                 setAccountTypeList(response.data);
             } else {
@@ -22,11 +22,11 @@ function AccountTypeList() {
     }, [])
 
     function handleView(row){
-        navigate(`/admin/accountType/view/${row.accountId}`)
+        navigate(`/admin/accounts/view/${row.accountId}`)
     }
     return (
         <div className="full-container">
-            <h3>Account Types List </h3>
+            <h3>Customer Account's List </h3>
             <Card>
                 <Card.Body>
                     <Table responsive>
@@ -34,10 +34,9 @@ function AccountTypeList() {
                             <tr>
                                 <th>S No.</th>
                                 <th>Account Id</th>
-                                <th>Account Name</th>
-                                <th>Account Code</th>
-                                <th>Minimum Balance</th>
-                                <th>Rate of Interest</th>
+                                <th>Customer Name</th>
+                                <th>Account Type</th>
+                                <th>Balance</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -46,10 +45,9 @@ function AccountTypeList() {
                                 return <tr key={row.accountId}>
                                     <td>{index + 1}</td>
                                     <td>{row.accountId}</td>
+                                    <td>{row.firstName + " " + row.lastName}</td>
                                     <td>{row.name}</td>
-                                    <td>{row.code}</td>
-                                    <td>{row.minimumBalance}</td>
-                                    <td>{row.rateOfInterest}</td>
+                                    <td>{row.balance}</td>
                                     <td><Button variant="primary" onClick={()=>handleView(row)}>View</Button></td>
                                 </tr>
                             })}
@@ -62,4 +60,4 @@ function AccountTypeList() {
     );
 }
 
-export default AccountTypeList;
+export default AllAccountsList;

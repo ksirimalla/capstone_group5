@@ -1,7 +1,8 @@
 var CustomerRoutes = require("./src/customer");
 var AccountTypeRoutes = require("./src/accountType");
+var CustomerAccountRoutes = require("./src/accounts");
 var validateJwt = require("./src/config/jwt.handler");
-var allRoutes = [...CustomerRoutes, ...AccountTypeRoutes];
+var allRoutes = [...CustomerRoutes, ...AccountTypeRoutes, ...CustomerAccountRoutes];
 var basePath = "/v1";
 
 function GenerateRoutes(app) {

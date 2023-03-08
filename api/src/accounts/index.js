@@ -1,5 +1,6 @@
 var GetCustomerAccount = require("./getCustomerAccounts");
 var GetAllCustomerAccounts = require("./getAllCustomerAccounts");
+var GetCustomerAccountDetail = require("./getCustomerAccountDetail");
 
 const CustomerAccountRoutes = [
   {
@@ -12,6 +13,12 @@ const CustomerAccountRoutes = [
     path: "/getAllCustomerAccounts",
     method: "get",
     callback: GetAllCustomerAccounts,
+    guard:false
+  },
+  {
+    path: "/getAccountDetail",
+    method: "get",
+    callback: GetCustomerAccountDetail,
     guard:false
   }
 ];

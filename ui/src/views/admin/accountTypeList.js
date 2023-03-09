@@ -21,12 +21,23 @@ function AccountTypeList() {
         })
     }, [])
 
-    function handleView(row){
-        navigate(`/admin/accountType/view/${row.accountId}`)
+    function handleView(row) {
+        navigate(`/admin/accountTypes/view/${row.accountId}`)
     }
+
+    function handleCreate() {
+        navigate(`/admin/accountTypes/create`)
+    }
+
     return (
         <div className="full-container">
-            <h3>Account Types List </h3>
+            <div className='d-flex justify-content-between'>
+                <h3>Account Types List </h3>
+
+                <div>
+                    <Button variant="primary" onClick={handleCreate}>Create New</Button>
+                </div>
+            </div>
             <Card>
                 <Card.Body>
                     <Table responsive>
@@ -50,7 +61,7 @@ function AccountTypeList() {
                                     <td>{row.code}</td>
                                     <td>{row.minimumBalance}</td>
                                     <td>{row.rateOfInterest}</td>
-                                    <td><Button variant="primary" onClick={()=>handleView(row)}>View</Button></td>
+                                    <td><Button variant="primary" onClick={() => handleView(row)}>View</Button></td>
                                 </tr>
                             })}
                         </tbody>

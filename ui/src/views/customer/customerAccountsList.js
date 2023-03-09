@@ -25,7 +25,7 @@ function CustomerAccountsList() {
     }, [customerId])
 
     function handleView(row) {
-        // navigate(`/admin/customer/view/${row.customerId}`)
+        navigate(`/customer/accounts/${row.accountId}`)
     }
     return (
         <div className="full-container">
@@ -49,7 +49,7 @@ function CustomerAccountsList() {
                                     <td>{row.accountId}</td>
                                     <td>{row.name}</td>
                                     <td>{row.balance}</td>
-                                    <td><Button variant="primary" onClick={() => handleView(row)} disabled>View</Button></td>
+                                    <td><Button variant="primary" onClick={() => handleView(row)}>View</Button></td>
                                 </tr>
                             })}
                         </tbody>

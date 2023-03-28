@@ -12,25 +12,21 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { MoneyTransferSchema } from './moneyTransfer.schema';
+import AddBeneficiary from './addBeneficiary';
 
 function CustomerMoneyTransfer() {
     const { customerId } = useSelector(state => state.user);
     const [beneficiaryList, setBeneficiaryList] = useState([]);
     const [accountList, setAccountList] = useState([]);
+    const [showDialog, setShowDialog] = useState(false);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (customerId)
-    //         Axios.get("getCustomer?id=" + customerId, {}).then(response => {
-    //             if (response.data && response.data) {
-    //                 setCustomerDetails(response.data);
-    //             } else {
-    //                 setCustomerDetails({});
-    //             }
-    //         }).catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [customerId])
+    useEffect(() => {
+        if (customerId) {
+            getBeneficaryList();
+        }
+
+    }, [customerId])
 
     function handleSubmit(values) {
         Axios.put('updateCustomer', { customerId: customerId, ...values }).then((response) => {
@@ -52,7 +48,27 @@ function CustomerMoneyTransfer() {
     }
 
     function handleAddBeneficiary() {
+        setShowDialog(true);
+    }
 
+    function handleClose(value) {
+        if (value) {
+            getBeneficaryList();
+        }
+        setShowDialog(false);
+    }
+
+    function getBeneficaryList() {
+        Axios.get("getCustomerBeneficiaryList?id=" + customerId, {}).then(response => {
+            if (response.data && response.data) {
+                setBeneficiaryList(response.data);
+            } else {
+                setBeneficiaryList([]);
+            }
+        }).catch(err => {
+            console.log(err);
+            setBeneficiaryList([]);
+        })
     }
 
     return (
@@ -112,18 +128,20 @@ function CustomerMoneyTransfer() {
                                                             className={errors.beneficiary && touched.beneficiary ?
                                                                 "input-error" : null} onBlur={handleBlur} >
                                                             <option value={""}></option>
-                                                            {beneficiaryList.map(row => <option key={row.accountId} value={row.accountId}>{row.name}</option>)}
+                                                            {beneficiaryList.map(row => <option key={row.id} value={row.id}>
+                                                                {row.firstName} {" "} {row.lastName} ({row.email})
+                                                            </option>)}
                                                         </FormSelect>
                                                     </FormGroup>
                                                 )}
                                             </Field>
                                             <ErrorMessage name="beneficiary" component="span" className="text-danger text-start" />
                                         </Col>
-                                       
+
                                     </Row>
 
                                     <Row>
-                                    <Col className='d-flex flex-column'>
+                                        <Col className='d-flex flex-column'>
                                             <Field
                                                 name="amount"
                                             >
@@ -173,6 +191,7 @@ function CustomerMoneyTransfer() {
                 </Card.Body>
             </Card>
 
+            {showDialog && <AddBeneficiary show={showDialog} onClose={handleClose} />}
         </div>
     );
 }

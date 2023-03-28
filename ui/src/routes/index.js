@@ -24,6 +24,7 @@ import AdminAccountDetailView from '../views/admin/adminAccountDetailView';
 import CUstomerAccountDetailView from '../views/customer/customerAccountDetailView';
 import ViewAccountType from '../views/admin/viewAccountType';
 import CustomerMoneyTransfer from '../views/customer/moneyTransfer';
+import CustomerBeneficiaryList from '../views/customer/customerBeneficiaryList';
 
 
 const TODO = () => {
@@ -55,6 +56,7 @@ const routes = [
             { path: 'accounts', element: <CustomerAccountsList /> },
             { path: 'accounts/:id', element: <CUstomerAccountDetailView /> },
             { path: 'transfer', element: <CustomerMoneyTransfer /> },
+            { path: 'beneficiary', element: <CustomerBeneficiaryList /> },
             { path: '', element: <CustomerDashboard /> },
         ],
     },

@@ -40,6 +40,7 @@ function Header() {
                                 <Nav.Link href="/customer/profile">Profile</Nav.Link>
                                 <Nav.Link href="/customer/accounts">Accounts</Nav.Link>
                                 <Nav.Link href="/customer/transfer">Send Money</Nav.Link>
+                                <Nav.Link href="/customer/beneficiary">Manage Beneficiary</Nav.Link>
                             </>}
 
                     </Nav>

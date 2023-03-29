@@ -6,6 +6,7 @@ var AddBeneficiary = require("./addBeneficiary");
 var GetCustomerBeneficiaryList = require("./getCustomerBeneficiaryList");
 var DeleteBeneficiary = require("./deleteBeneficiary");
 var SendMoney = require("./sendMoney");
+var GetAccountTransactions = require("./getAccountTransactions");
 
 const CustomerAccountRoutes = [
   {
@@ -54,6 +55,12 @@ const CustomerAccountRoutes = [
     path: "/sendMoney",
     method: "post",
     callback: SendMoney,
+    guard: false
+  },
+  {
+    path: "/getAccountTransactions",
+    method: "get",
+    callback: GetAccountTransactions,
     guard: false
   },
 ];

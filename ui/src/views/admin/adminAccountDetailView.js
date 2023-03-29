@@ -5,11 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function AdminAccountDetailView() {
     const { id } = useParams();
     const [accountDetails, setAccountDetails] = useState({});
+    const [accountTransactions, setAccountTransactions] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,6 +21,15 @@ function AdminAccountDetailView() {
                     setAccountDetails(response.data[0]);
                 } else {
                     setAccountDetails({});
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+            Axios.get("getAccountTransactions?id=" + id, {}).then(response => {
+                if (response.data && response.data) {
+                    setAccountTransactions(response.data);
+                } else {
+                    setAccountTransactions({});
                 }
             }).catch(err => {
                 console.log(err);
@@ -89,7 +100,31 @@ function AdminAccountDetailView() {
             </div>
             <Card>
                 <Card.Body>
-                    Pending
+                <Table responsive>
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Sent To</th>
+                                <th>Balance</th>
+                                <th>Type</th>
+                                <th>Sent Date/Time</th>
+                                <th>Comments</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {accountTransactions.map((row, index) => {
+                                return <tr key={row.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{row.firstName + " " + row.lastName + "("+ row.email+")"}</td>
+                                    <td>{row.balance}</td>
+                                    <td>{row.type}</td>
+                                    <td>{new Date(row.createdAt).toLocaleString()}</td>
+                                    <td>{row.comments}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </Table>
                 </Card.Body>
             </Card>
 

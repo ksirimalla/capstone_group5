@@ -22,5 +22,6 @@ db.Customer = require("./customer")(sequelize, Sequelize);
 db.AccountType = require("./accountType")(sequelize, Sequelize);
 db.Accounts = require("./accounts")(sequelize, Sequelize);
 db.Beneficiary = require("./beneficiary")(sequelize, Sequelize);
+db.Transaction = require("./transaction")(sequelize, Sequelize);
 
 module.exports = db;

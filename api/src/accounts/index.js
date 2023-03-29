@@ -5,49 +5,56 @@ var GetAccountById = require("./getAccountById");
 var AddBeneficiary = require("./addBeneficiary");
 var GetCustomerBeneficiaryList = require("./getCustomerBeneficiaryList");
 var DeleteBeneficiary = require("./deleteBeneficiary");
+var SendMoney = require("./sendMoney");
 
 const CustomerAccountRoutes = [
   {
     path: "/getCustomerAccounts",
     method: "get",
     callback: GetCustomerAccount,
-    guard:false
+    guard: false
   },
   {
     path: "/getAllCustomerAccounts",
     method: "get",
     callback: GetAllCustomerAccounts,
-    guard:false
+    guard: false
   },
   {
     path: "/getAccountDetail",
     method: "get",
     callback: GetCustomerAccountDetail,
-    guard:false
+    guard: false
   },
   {
     path: "/getAccountById",
     method: "get",
     callback: GetAccountById,
-    guard:false
+    guard: false
   },
   {
     path: "/addBeneficiary",
     method: "post",
     callback: AddBeneficiary,
-    guard:false
+    guard: false
   },
   {
     path: "/getCustomerBeneficiaryList",
     method: "get",
     callback: GetCustomerBeneficiaryList,
-    guard:false
+    guard: false
   },
   {
     path: "/deleteBeneficiary",
     method: "delete",
     callback: DeleteBeneficiary,
-    guard:false
+    guard: false
+  },
+  {
+    path: "/sendMoney",
+    method: "post",
+    callback: SendMoney,
+    guard: false
   },
 ];
 

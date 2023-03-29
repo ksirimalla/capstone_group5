@@ -19,26 +19,29 @@ function CustomerMoneyTransfer() {
     const [accountList, setAccountList] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (customerId)
-    //         Axios.get("getCustomer?id=" + customerId, {}).then(response => {
-    //             if (response.data && response.data) {
-    //                 setCustomerDetails(response.data);
-    //             } else {
-    //                 setCustomerDetails({});
-    //             }
-    //         }).catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [customerId])
+    useEffect(() => {
+        if (customerId) {
+            getBeneficaryList();
+            Axios.get("getCustomerAccounts?id=" + customerId, {}).then(response => {
+                if (response.data && response.data.length) {
+                    setAccountList(response.data);
+                } else {
+                    setAccountList([]);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+
+    }, [customerId])
 
     function handleSubmit(values) {
-        Axios.put('updateCustomer', { customerId: customerId, ...values }).then((response) => {
-            if (response.data) {
-                alert("Updated");
-                // navigate("/login")
+        Axios.post('sendMoney', { ...values }).then((response) => {
+            if (response.data && response.data.status) {
+                alert("Money Sent");
+                navigate("/customer")
             } else {
-                alert("Error")
+                alert(response.data.message)
             }
         }).catch(err => {
             console.log(err);
@@ -91,7 +94,8 @@ function CustomerMoneyTransfer() {
                                                             className={errors.accountId && touched.accountId ?
                                                                 "input-error" : null} onBlur={handleBlur} >
                                                             <option value={""}></option>
-                                                            {accountList.map(row => <option key={row.accountId} value={row.accountId}>{row.name}</option>)}
+                                                            {accountList.map(row => <option key={row.accountId} value={row.accountId}>
+                                                                {row.accountId + " (" + row.name + ") - "+ row.balance}</option>)}
                                                         </FormSelect>
                                                     </FormGroup>
                                                 )}
@@ -100,7 +104,7 @@ function CustomerMoneyTransfer() {
                                         </Col>
                                         <Col className='d-flex flex-column'>
                                             <Field
-                                                name="accountId"
+                                                name="beneficiary"
                                             >
                                                 {({ field }) => (
                                                     <FormGroup controlId="beneficiary" className="d-flex flex-column">

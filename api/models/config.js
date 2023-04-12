@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
+    HOST: "database-capstoneg5.culpvholjumc.us-east-2.rds.amazonaws.com",
+    USER: "capstoneAdmin",
+    PASSWORD: "Kranthi435",
     DB: "branchlessBank",
     PORT:"3306",
     dialect: "mysql",

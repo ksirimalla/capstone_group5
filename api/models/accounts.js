@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
     accountType: {
       type: Sequelize.INTEGER,
       references: {
-        model: 'accounttypes',
+        model: 'accountTypes',
         key: 'accountId'
       }
     },

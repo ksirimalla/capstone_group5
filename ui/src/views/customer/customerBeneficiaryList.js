@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AddBeneficiary from './addBeneficiary';
-
+import { toast } from 'react-toastify';
 function CustomerBeneficiaryList() {
     const [beneficiaryList, setBeneficiaryList] = useState([]);
     const navigate = useNavigate();
@@ -23,13 +23,14 @@ function CustomerBeneficiaryList() {
     function handleDelete(row) {
         Axios.delete("deleteBeneficiary?id=" + row.id, {}).then(response => {
             if (response.data && response.data) {
+                toast.success("Deleted Sucessfully!");
                 getBeneficaryList();
             } else {
-                alert("Error");
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 

@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 function AccountTypeList() {
     const [accountTypeList, setAccountTypeList] = useState([]);
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ function AccountTypeList() {
             }
         }).catch(err => {
             console.log(err);
+            toast.error("Error");
         })
     }, [])
 

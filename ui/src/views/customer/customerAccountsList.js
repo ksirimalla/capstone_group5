@@ -5,10 +5,9 @@ import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function CustomerAccountsList() {
     const [customerList, setCustomerList] = useState([]);
@@ -67,15 +66,16 @@ function CustomerAccountsList() {
 
         }).then(response => {
             if (response.data && response.data.status) {
-                alert("Account added");
+                toast.success("Account added Sucessfully!");
                 getCustomerAccounts();
                 setShowDialog(false);
             } else {
-                alert(response.data.message);
+                toast.error(response.data.message);
                 setShowDialog(false);
             }
         }).catch(err => {
             console.log(err);
+            toast.error("Error");
         })
     }
 

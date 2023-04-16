@@ -14,7 +14,7 @@ import Image from 'react-bootstrap/Image'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setupUser } from '../../store/features/userReducer';
-
+import { toast } from 'react-toastify';
 
 function Login() {
     const navigate = useNavigate();
@@ -33,9 +33,12 @@ function Login() {
                 } else {
                     navigate("/customer");
                 }
+            }else{
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
+            toast.error('Something Not Found');
         })
     }
 

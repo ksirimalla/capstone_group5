@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Axios from "../../utils/axios";
 import { useNavigate } from 'react-router-dom';
 import { CreateAccountTypeSchema } from './createAccountType.schema';
-
+import { toast } from 'react-toastify';
 function CreateAccountType() {
     const navigate = useNavigate();
     const initialValues = {
@@ -23,14 +23,14 @@ function CreateAccountType() {
     function handleSubmit(values) {
         Axios.post('createAccountType', values).then((response) => {
             if (response.data) {
-                alert("Created");
+                toast.success("Created Sucessfully!");
                 navigate("/admin/accountTypes")
             } else {
-                alert("Error")
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 
@@ -100,7 +100,7 @@ function CreateAccountType() {
                                                         <FormLabel className='text-start'>Rate of Interest(%)</FormLabel>
                                                         <FormControl type={'number'} value={field.value} onChange={field.onChange}
                                                             className={errors.rateOfInterest && touched.rateOfInterest ?
-                                                                "input-error" : null} onBlur={handleBlur} max="10"/>
+                                                                "input-error" : null} onBlur={handleBlur} max="10" />
                                                     </FormGroup>
                                                 )}
                                             </Field>

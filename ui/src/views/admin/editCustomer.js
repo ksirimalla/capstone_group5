@@ -10,6 +10,7 @@ import FormLabel from 'react-bootstrap/FormLabel';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate, useParams } from 'react-router-dom';
 import { EditCustomerSchema } from './editCustomer.schema';
+import { toast } from 'react-toastify';
 
 function EditCustomer() {
     const { id } = useParams();
@@ -32,14 +33,13 @@ function EditCustomer() {
     function handleSubmit(values) {
         Axios.put('updateCustomer', { customerId: id, ...values }).then((response) => {
             if (response.data) {
-                alert("Updated");
-                // navigate("/login")
+                toast.success("Updated Sucessfully!");
             } else {
-                alert("Error")
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 

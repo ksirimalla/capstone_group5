@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ViewCustomer() {
     const { id } = useParams();
@@ -22,6 +23,7 @@ function ViewCustomer() {
                 }
             }).catch(err => {
                 console.log(err);
+                toast.error("Error");
             })
     }, [id])
 

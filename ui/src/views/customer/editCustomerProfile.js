@@ -11,6 +11,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import { EditCustomerProfileSchema } from './editCustomerProfile.schema';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function EditCustomerProfile() {
     const { customerId } = useSelector(state => state.user);
@@ -33,14 +34,14 @@ function EditCustomerProfile() {
     function handleSubmit(values) {
         Axios.put('updateCustomer', { customerId: customerId, ...values }).then((response) => {
             if (response.data) {
-                alert("Updated");
+                toast.success("Updated Sucessfully!");
                 // navigate("/login")
             } else {
-                alert("Error")
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 

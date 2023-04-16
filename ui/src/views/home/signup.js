@@ -13,6 +13,7 @@ import LoginImage from "../../assets/images/home.jpg";
 import Image from 'react-bootstrap/Image';
 import Axios from "../../utils/axios";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Signup() {
     const navigate = useNavigate();
@@ -38,14 +39,14 @@ function Signup() {
     function handleSubmit(values) {
         Axios.post('register', values).then((response) => {
             if (response.data) {
-                alert("Created");
+                toast.success("User Created Succefully");
                 navigate("/login")
             } else {
-                alert("Error")
+                toast.error(response.data.message);
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 

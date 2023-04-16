@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { MoneyTransferSchema } from './moneyTransfer.schema';
 import AddBeneficiary from './addBeneficiary';
+import { toast } from 'react-toastify';
 
 function CustomerMoneyTransfer() {
     const { customerId } = useSelector(state => state.user);
@@ -40,14 +41,14 @@ function CustomerMoneyTransfer() {
     function handleSubmit(values) {
         Axios.post('sendMoney', { ...values }).then((response) => {
             if (response.data && response.data.status) {
-                alert("Money Sent");
+                toast.success("Money Sent Sucessfully!");
                 navigate("/customer")
             } else {
-                alert(response.data.message)
+                toast.error(response.data.message)
             }
         }).catch(err => {
             console.log(err);
-            alert("Error");
+            toast.error("Error");
         })
     }
 

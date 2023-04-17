@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setupUser } from '../../store/features/userReducer';
+import logo from "../../assets/images/logo.png";
 
 function Header() {
     const userDetails = useSelector(state => state.user);
@@ -26,6 +27,7 @@ function Header() {
     return (
         <Navbar bg="primary" variant="dark" collapseOnSelect expand="lg">
             <Container>
+                <img className="logo" src={logo} />
                 <Navbar.Brand href={isAdminRole ? '/admin' : '/customer'}>Branchless Bank</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

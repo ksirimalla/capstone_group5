@@ -7,6 +7,8 @@ import Axios from "../../utils/axios";
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { useNavigate, useParams } from 'react-router-dom';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function CUstomerAccountDetailView() {
     const { id } = useParams();
@@ -39,6 +41,30 @@ function CUstomerAccountDetailView() {
     function handleCancel() {
         navigate(`/customer/accounts`)
     }
+
+    function exportPDF() {
+    
+        const marginLeft = 40;
+        const doc = new jsPDF("portrait", "pt", "A4");
+    
+        doc.setFontSize(15);
+    
+        const title = `Transactions for ${accountDetails?.firstName} ${accountDetails?.lastName}(${accountDetails?.accountId})`;
+        const headers = [["S No", "Sent To","Balance","Type","Sent Date/Time","Comments"]];
+    
+        const data = accountTransactions.map((row,i)=> [i +1, row.firstName + " " + row.lastName + "("+ row.email+")",
+        row.balance,row.type,new Date(row.createdAt).toLocaleString(),row.comments]);
+    
+        let content = {
+          startY: 50,
+          head: headers,
+          body: data
+        };
+    
+        doc.text(title, marginLeft, 40);
+        doc.autoTable(content);
+        doc.save("transactions.pdf")
+      }
     return (
         <div className="full-container">
             <div className='d-flex justify-content-between'>
@@ -97,6 +123,9 @@ function CUstomerAccountDetailView() {
 
             <div className='d-flex justify-content-between mt-5'>
                 <h3>Transactions</h3>
+                <div>
+                    <Button variant="" onClick={exportPDF}>Download</Button>
+                </div>
             </div>
             <Card>
                 <Card.Body>

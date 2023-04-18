@@ -47,3 +47,14 @@
   width: 90px;
   margin-right: 1rem;
 }
+
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  margin: 2em;
+}
+
+.dashboard-title {
+  color: red;
+  font-size: 2rem;
+}

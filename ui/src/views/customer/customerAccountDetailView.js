@@ -50,7 +50,7 @@ function CUstomerAccountDetailView() {
         doc.setFontSize(15);
     
         const title = `Transactions for ${accountDetails?.firstName} ${accountDetails?.lastName}(${accountDetails?.accountId})`;
-        const headers = [["S No", "Sent To","Balance","Type","Sent Date/Time","Comments"]];
+        const headers = [["S No", "Sent From/To","Balance","Type","Sent Date/Time","Comments"]];
     
         const data = accountTransactions.map((row,i)=> [i +1, row.firstName + " " + row.lastName + "("+ row.email+")",
         row.balance,row.type,new Date(row.createdAt).toLocaleString(),row.comments]);
@@ -133,7 +133,7 @@ function CUstomerAccountDetailView() {
                         <thead>
                             <tr>
                                 <th>S No.</th>
-                                <th>Sent To</th>
+                                <th>Sent From/To</th>
                                 <th>Balance</th>
                                 <th>Type</th>
                                 <th>Sent Date/Time</th>

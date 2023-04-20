@@ -104,7 +104,7 @@ function AdminAccountDetailView() {
                         <thead>
                             <tr>
                                 <th>S No.</th>
-                                <th>Sent To</th>
+                                <th>Sent From/To</th>
                                 <th>Balance</th>
                                 <th>Type</th>
                                 <th>Sent Date/Time</th>
